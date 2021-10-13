@@ -1,0 +1,334 @@
+default_border pixel 3
+default_orientation auto
+xwayland enable
+gaps inner 10
+
+
+
+
+set $mod Mod4
+
+
+
+# Your preferred terminal emulator
+set $term kitty
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu wofi --show=drun --lines=5 --prompt=""
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg ~/Pictures/wallpaper.png fill
+#
+# Example configuration:
+#
+ output eDP-1 resolution 1920x1080 position 0,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+#
+exec swayidle -w \
+          timeout 900 'swaylock -f -c 000000' \
+          timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -f -c 000000'
+
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+# Multimedia
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 #to increase 5%
+
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 #to decrease 5%
+bindsym --locked XF86AudioMute exec --no-startup-id pamixer -t #mute
+set $music player controls
+mode "$music" {
+    bindsym XF86AudioRaiseVolume exec playerctl next
+    bindsym XF86AudioLowerVolume exec playerctl previous
+    bindsym XF86AudioMute exec playerctl play-pause
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$music"
+
+set $brave choose website [Y]outube, [A]rch, [G]oogle, [S]chool g[M]ail
+mode "$brave" {
+    bindsym y exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland www.youtube.com , mode "default"
+    bindsym a exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://wiki.archlinux.org/ , mode "default"
+    bindsym g exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland www.google.com , mode "default"
+    bindsym s exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://ilearn.dsv.su.se/my/ , exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://athena.itslearning.com/ , exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://people.dsv.su.se/~pierre/i/i.cgi , mode "default"
+    bindsym m exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://mail.google.com/mail/u/0/ , mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+b mode "$brave"
+# Brightness controls
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86ScreenSaver exec brightnessctl set 0%
+
+
+input 1:1:AT_Translated_Set_2_keyboard {
+    xkb_layout "se"
+}
+input 1267:5:Elan_Touchpad {
+    tap enabled
+    dwt enabled
+    accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
+}
+
+
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # move focus $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # move item, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+  
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1:"  
+set $ws2 "2:"  
+set $ws3 "3:"  
+set $ws4 "4:"  
+set $ws5 "5:"  
+set $ws6 "6:"  
+set $ws7 "7:"  
+set $ws8 "8:"  
+set $ws9 "9:"  
+set $ws10 "10:"
+
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+
+#my programs
+
+
+# my own programs
+bindsym $mod+i exec idea
+#bindsym $mod+c exec clion
+bindsym $mod+o exec webstorm, exec chromium
+bindsym $mod+b exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland
+bindsym $mod+p exec nautilus
+#bindsym $mod+m exec vlc
+#bindsym Print exec grim
+
+for_window [app_id="discord"] move to workspace  $ws2
+for_window [class="Spotify"] move to workspace $ws3
+assign [app_id="brave-browser"] $ws4
+for_window [app_id="brave-browser"] focus
+assign [class="jetbrains-idea"] $ws5
+for_window [class="jetbrains-idea"] focus
+assign [class="sun-awt-X11-XFramePeer"] $ws5
+for_window [class="sun-awt-X11-XFramePeer"] focus
+assign [app_id="kitty"] $ws6
+for_window [app_id="kitty"] focus
+assign [class="Opera"] $ws7
+assign [class="vlc"] $ws8
+for_window [class="vlc"] focus
+assign [app_id="firefox"] $ws9
+assign [class="jetbrains-webstorm"] $ws5
+assign [instance="chromium"] $ws5
+for_window [class="jetbrains-webstorm"] focus
+for_window [class="Conky"] {
+        move scratchpad
+        resize set 1920 1080
+    }
+# autostart here:
+exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec spotify
+exec firefox
+exec kitty
+exec mako
+#exec conky
+exec discord-canary --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right  
+#exec jetbrains-toolbox
+
+
+
+# opacity rules
+set $opacity 0.9
+for_window [app_id="discord"] opacity $opacity
+# border rules
+
+
+# cancel screensaver Rules
+
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
+
+# Zoom Meeting App
+# 
+# Default for all windows is non-floating.
+# 
+# For pop up notification windows that don't use notifications api
+for_window [app_id="zoom" title="^zoom$"] border none, floating enable
+# For specific Zoom windows
+for_window [app_id="zoom" title="^(Zoom|About)$"] border pixel, floating enable
+#for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
+# Open Zoom Meeting windows on a new workspace (a bit hacky)
+for_window [app_id="zoom" title="Zoom Meeting(.*)?"] move to workspace $ws10, floating disable
+
+
+
+
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+#bar {
+ #   position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+  #  status_command while ~/.config/sway/swaybarscript.sh; do sleep 1; done
+   # strip_workspace_numbers yes
+    #colors {
+     #   statusline #01ffff
+     # background #111111
+      #  inactive_workspace #1c39a5 #1b6ae2 #ffffff
+       # focused_workspace #1c39a5 #22b31c #ffffff
+        #urgent_workspace #1c39a5 #d0173e #ffffff
+   # }
+#}
+bar {
+    swaybar_command waybar
+}
+include /etc/sway/config.d/*

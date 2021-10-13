@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/run/media/freja/school/Laptop/dotconfig'
+let g:netrw_dirhist_5='/run/media/freja/school/Laptop'
+let g:netrw_dirhist_4='/run/media/freja/school'
+let g:netrw_dirhist_3='/run/media/freja'
+let g:netrw_dirhist_2='/run/media'
+let g:netrw_dirhist_1='/run/media/freja/school'
+let g:netrw_dirhist_0='/run/media/freja'
+let g:netrw_dirhist_9='/run/media'
+let g:netrw_dirhist_8='/home/freja/.config/i3'
+let g:netrw_dirhist_7='/home/freja/.config'
