@@ -32,9 +32,9 @@ output * bg ~/Pictures/wallpaper.png fill
 # Example configuration:
 #
 exec swayidle -w \
-          timeout 900 'swaylock -f -c 000000' \
+          timeout 900 'swaylock -f -i $HOME/Pictures/screensaverAuto.png' \
           timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -f -c 000000'
+          before-sleep 'swaylock -f -i $HOME/Pictures/screensaverAuto.png'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -84,7 +84,8 @@ bindsym $mod+Shift+b mode "$brave"
 # Brightness controls
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86ScreenSaver exec brightnessctl set 0%
+bindsym XF86ScreenSaver exec swaylock -f -i $HOME/Pictures/screensaver.jpeg
+
 
 
 input 1:1:AT_Translated_Set_2_keyboard {
@@ -145,10 +146,10 @@ input 1267:5:Elan_Touchpad {
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:"  
-set $ws2 "2:"  
-set $ws3 "3:"  
+set $ws2 "2:"  
+set $ws3 "3:"  
 set $ws4 "4:"  
-set $ws5 "5:"  
+set $ws5 "5:"  
 set $ws6 "6:"  
 set $ws7 "7:"  
 set $ws8 "8:"  
@@ -248,7 +249,7 @@ bindsym $mod+p exec nautilus
 #bindsym $mod+m exec vlc
 #bindsym Print exec grim
 
-for_window [app_id="discord"] move to workspace  $ws2
+for_window [class="discord"] move to workspace  $ws2
 for_window [class="Spotify"] move to workspace $ws3
 assign [app_id="brave-browser"] $ws4
 for_window [app_id="brave-browser"] focus
@@ -270,15 +271,14 @@ for_window [class="Conky"] {
         resize set 1920 1080
     }
 # autostart here:
-exec discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+exec discord
 exec spotify
 exec firefox
 exec kitty
 exec mako
 #exec conky
-exec discord-canary --enable-features=UseOzonePlatform --ozone-platform=wayland
-exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right  
-#exec jetbrains-toolbox
+exec discord-canary
+exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
 
 
 
