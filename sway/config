@@ -286,7 +286,6 @@ exec mako
 #exec conky
 exec discord-canary
 exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
-exec $HOME/.config/scripts/automount.sh
 
 
 
