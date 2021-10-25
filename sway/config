@@ -245,7 +245,7 @@ bindsym $mod+i exec idea
 bindsym $mod+o exec webstorm, exec chromium
 bindsym $mod+b exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland
 bindsym $mod+p exec nautilus
-bindsym $mod+n exec obsidian, exec obsidian
+bindsym $mod+n exec obsidian
 
 
 
@@ -281,12 +281,11 @@ for_window [class="Conky"] {
 exec discord
 exec spotify
 exec firefox
-exec kitty
+exec $HOME/.config/scripts/terminals.sh
 exec mako
 #exec conky
 exec discord-canary
 exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
-
 
 
 
