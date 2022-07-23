@@ -2,16 +2,22 @@ default_border pixel 3
 default_orientation auto
 xwayland enable
 gaps inner 10
-
+include "$HOME/.cache/wal/colors-sway"
 
 
 
 set $mod Mod4
 
 
-# colours
+# colours TODO check with wal to see what colours to use
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-
+client.background       #ffffff
 
 
 # Your preferred terminal emulator
@@ -89,7 +95,7 @@ bindsym $mod+Shift+b mode "$brave"
 # Brightness controls
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86ScreenSaver exec swaylock -f -i $HOME/Pictures/screensaver.jpeg
+# bindsym XF86ScreenSaver exec swaylock -f -i $HOME/Pictures/screensaver.jpeg TODO download a pic for screensaver
 
 
 
@@ -250,6 +256,7 @@ bindsym $mod+i exec idea
 bindsym $mod+b exec firefox
 bindsym $mod+p exec nautilus
 bindsym $mod+n exec obsidian
+bindsym printscreen exec flameshot
 
 
 
@@ -286,7 +293,7 @@ exec $HOME/.config/scripts/terminals.sh
 exec mako
 exec discord-canary
 exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
-# wallpaper
+# wallpaper, might need to move this to shell instead
 exec wal --iterative -o $HOME/.config/scripts/wallpaper.sh -i $HOME/Pictures/ 
 
 
