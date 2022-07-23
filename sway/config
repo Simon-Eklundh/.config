@@ -9,6 +9,10 @@ gaps inner 10
 set $mod Mod4
 
 
+# colours
+
+
+
 
 # Your preferred terminal emulator
 set $term kitty
@@ -265,8 +269,6 @@ assign [class="Opera"] $ws7
 assign [class="vlc"] $ws8
 for_window [class="vlc"] focus
 assign [app_id="caprine"] $ws9
-
-
 for_window [class="Conky"] {
         move scratchpad
         resize set 1920 1080
@@ -284,6 +286,8 @@ exec $HOME/.config/scripts/terminals.sh
 exec mako
 exec discord-canary
 exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
+# wallpaper
+exec wal --iterative -o $HOME/.config/scripts/wallpaper.sh -i $HOME/Pictures/ 
 
 
 
@@ -306,7 +310,7 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 for_window [app_id="zoom" title="^zoom$"] border none, floating enable
 # For specific Zoom windows
 for_window [app_id="zoom" title="^(Zoom|About)$"] border pixel, floating enable
-#for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
+for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
 # Open Zoom Meeting windows on a new workspace (a bit hacky)
 for_window [app_id="zoom" title="Zoom Meeting(.*)?"] move to workspace $ws10, floating disable
 
