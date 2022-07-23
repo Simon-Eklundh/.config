@@ -19,7 +19,7 @@ set $menu wofi --show=drun --lines=5 --prompt=""
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/wallpaper.png fill
+output * bg $wallpaper fill
 #
 # Example configuration:
 #
@@ -81,6 +81,7 @@ mode "$brave" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+b mode "$brave"
+
 # Brightness controls
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
@@ -242,8 +243,7 @@ bindsym $mod+r mode "resize"
 
 # my own programs
 bindsym $mod+i exec idea
-bindsym $mod+o exec webstorm, exec chromium
-bindsym $mod+b exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland
+bindsym $mod+b exec firefox
 bindsym $mod+p exec nautilus
 bindsym $mod+n exec obsidian
 
@@ -253,8 +253,8 @@ assign [class="obsidian"] $ws1
 for_window [class="obsidian"] focus
 for_window [class="discord"] move to workspace  $ws2
 for_window [class="Spotify"] move to workspace $ws3
-assign [app_id="brave-browser"] $ws4
-for_window [app_id="brave-browser"] focus
+assign [app_id="firefox"] $ws4
+for_window [app_id="firefox"] focus
 assign [class="jetbrains-idea"] $ws5
 for_window [class="jetbrains-idea"] focus
 assign [class="sun-awt-X11-XFramePeer"] $ws5
@@ -264,10 +264,9 @@ for_window [app_id="kitty"] focus
 assign [class="Opera"] $ws7
 assign [class="vlc"] $ws8
 for_window [class="vlc"] focus
-assign [app_id="firefox"] $ws9
-assign [class="jetbrains-webstorm"] $ws5
-assign [instance="chromium"] $ws5
-for_window [class="jetbrains-webstorm"] focus
+assign [app_id="caprine"] $ws9
+
+
 for_window [class="Conky"] {
         move scratchpad
         resize set 1920 1080
@@ -280,10 +279,9 @@ for_window [class="Conky"] {
 # autostart here:
 exec discord
 exec spotify
-exec firefox
+exec caprine
 exec $HOME/.config/scripts/terminals.sh
 exec mako
-#exec conky
 exec discord-canary
 exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
 
