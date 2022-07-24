@@ -141,17 +141,17 @@ set $ws8 "8"
 set $ws9 "9" 
 set $ws10 "10/" 
 
-workspace $ws1 output DP-0
-workspace $ws2 output DP-0
-workspace $ws3 output DP-0
-workspace $ws4 output DP-0
-workspace $ws5 output DP-0
-workspace $ws6 output DP-0
-workspace $ws7 output DP-0
+#workspace $ws1 output DP-0
+#workspace $ws2 output DP-0
+#workspace $ws3 output DP-0
+#workspace $ws4 output DP-0
+#workspace $ws5 output DP-0
+#workspace $ws6 output DP-0
+#workspace $ws7 output DP-0
 
-workspace $ws8 output HDMI-0
-workspace $ws9 output HDMI-0
-workspace $ws10 output HDMI-0
+#workspace $ws8 output HDMI-0
+#workspace $ws9 output HDMI-0
+#workspace $ws10 output HDMI-0
 
 
 # switch to workspace
@@ -180,32 +180,30 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # my own programs
 bindsym $mod+i exec intellij-idea-ultimate-edition
-bindsym $mod+c exec clion
-bindsym $mod+b exec brave
-bindsym $mod+p exec nautilus
-bindsym $mod+m exec vlc
+bindsym $mod+b exec firefox
+bindsym $mod+p exec pcmanfm
 
 
 
 
-assign [class="discord"] $ws10
-for_window [con_mark="personal"] title_format "personal %title"
-for_window [con_mark="professional"] title_format "professional %title"
-for_window [class="Spotify"]move to workspace $ws2
-assign [class="Brave"] $ws3
-for_window [class="Brave"] focus
-assign [class="jetbrains-idea"] $ws4
+assign [class="discord"] $ws2
+#for_window [con_mark="personal"] title_format "personal %title"
+#for_window [con_mark="professional"] title_format "professional %title"
+for_window [class="Spotify"]move to workspace $ws3
+assign [class="firefox"] $ws4
+for_window [class="firefox"] focus
+assign [class="jetbrains-idea"] $ws5
 for_window [class="jetbrains-idea"] focus
-assign [class="sun-awt-X11-XFramePeer"] $ws4
+assign [class="sun-awt-X11-XFramePeer"] $ws5
 for_window [class="sun-awt-X11-XFramePeer"] focus
-assign [class="kitty"] $ws5
+assign [class="kitty"] $ws6
 for_window [class="kitty"] focus
-assign [class="Opera"] $ws8
-assign [class="vlc"] $ws9
-for_window [class="vlc"] focus
-assign [class="Vivaldi-stable"] $ws9
-for_window [class="Vivaldi-stable"] focus
-assign [class="firefox"] $ws10
+#assign [class="Opera"] $ws8
+#assign [class="vlc"] $ws9
+#for_window [class="vlc"] focus
+#assign [class="Vivaldi-stable"] $ws9
+#for_window [class="Vivaldi-stable"] focus
+assign [class="caprine"] $ws9
 
 
 
@@ -218,8 +216,9 @@ exec_always --no-startup-id kitty
 exec_always --no-startup-id picom
 exec --no-startup-id xrandr --output HDMI-0 --mode 3840x2160 --pos 3840x0 --rotate normal --output DP-0 --primary --mode 3840x2160 --pos 0x0 --rotate normal 
 exec --no-startup-id conky 
-exec --no-startup-id $HOME/.config/scripts/discordStartingScript.sh
-
+#exec --no-startup-id $HOME/.config/scripts/discordStartingScript.sh
+exec --no-startup-id discord
+exec --no-startup-id discord-canary
 
 
 
