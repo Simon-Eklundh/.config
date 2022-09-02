@@ -80,22 +80,12 @@ mode "$music" {
 }
 bindsym $mod+m mode "$music"
 
-set $brave choose website [Y]outube, [A]rch, [G]oogle, [S]chool g[M]ail
-mode "$brave" {
-    bindsym y exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland www.youtube.com , mode "default"
-    bindsym a exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://wiki.archlinux.org/ , mode "default"
-    bindsym g exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland www.google.com , mode "default"
-    bindsym s exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://ilearn.dsv.su.se/my/ , exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://athena.itslearning.com/ , exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://people.dsv.su.se/~pierre/i/i.cgi , mode "default"
-    bindsym m exec brave --enable-features=UseOzonePlatform --ozone-platform=wayland https://mail.google.com/mail/u/0/ , mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+b mode "$brave"
 
 # Brightness controls
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-# bindsym XF86ScreenSaver exec swaylock -f -i $HOME/Pictures/screensaver.jpeg TODO download a pic for screensaver
+ bindsym XF86ScreenSaver exec swaylock -f -i $HOME/Pictures/bloody-red-dialga-4ct5yx5g4ott6x3d.jpg
+# TODO download a pic for screensaver
 
 
 
@@ -254,9 +244,9 @@ bindsym $mod+r mode "resize"
 # my own programs
 bindsym $mod+i exec idea
 bindsym $mod+b exec firefox
-bindsym $mod+p exec nautilus
+bindsym $mod+p exec dolphin
 bindsym $mod+n exec obsidian
-bindsym printscreen exec flameshot
+bindsym Print exec flameshot gui
 
 
 
@@ -275,17 +265,14 @@ for_window [app_id="kitty"] focus
 assign [class="Opera"] $ws7
 assign [class="vlc"] $ws8
 for_window [class="vlc"] focus
-assign [app_id="caprine"] $ws9
-for_window [class="Conky"] {
-        move scratchpad
-        resize set 1920 1080
-    }
+assign [class="Caprine"] $ws9
 
 
 
 
 
 # autostart here:
+exec --no-startup-id autotiling
 exec discord
 exec spotify
 exec caprine
@@ -295,8 +282,14 @@ exec discord-canary
 exec nwg-wrapper -s $HOME/.config/scripts/keybinds.sh -p right
 # wallpaper, might need to move this to shell instead
 exec wal --iterative -o $HOME/.config/scripts/wallpaper.sh -i $HOME/Pictures/ 
+exec nm-applet
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 
 
+#Screenshot data:
 
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # opacity rules
 set $opacity 0.9
